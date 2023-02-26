@@ -491,3 +491,34 @@ and
 					   from 
 					   	pc))
 ```
+
+##26 
+### Найдите среднюю цену ПК и ПК-блокнотов, выпущенных производителем A (латинская буква). Вывести: одна общая средняя цена.
+
+```
+select 
+	avg(price) as avg_price 
+from (
+  select 
+  	price 
+  from 
+  	pc 
+  join 
+	product
+  on 
+  	pc.model = product.model 
+  where 
+  	maker = 'A'
+union all 
+   select 
+   	price 
+   from 
+   	laptop 
+   join 
+	product
+   on 
+   	laptop.model = product.model
+   where 
+   	maker = 'A'
+  ) as rv
+```
