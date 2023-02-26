@@ -3,13 +3,13 @@
 
 ```
 select 
-  model, 
-  speed, 
-  hd
+	model, 
+	speed, 
+	hd
 from 
-  PC
+	PC
 where 
-  price < 500
+	price < 500
 ```
 
 ## 2 
@@ -17,11 +17,11 @@ where
 
 ```
 SELECT 
-  DISTINCT maker
+	DISTINCT maker
 FROM 
-  Product
+	Product
 WHERE 
-  type='Printer'
+	type='Printer'
 ```
 
 ## 3 
@@ -29,13 +29,13 @@ WHERE
 
 ```
 select 
-  model, 
-  ram, 
-  screen
+	model, 
+	ram, 
+	screen
 from 
-  laptop
+	laptop
 where 
-  price > 1000
+	price > 1000
 ```
 
 ## 4 
@@ -43,11 +43,11 @@ where
 
 ```
 select 
-  * 
+	* 
 from 
-  Printer 
-where 
-  color = 'y'
+	Printer 
+where
+	color = 'y'
 ```
 
 ## 5 
@@ -55,15 +55,15 @@ where
 
 ```
 select 
-    model, 
-    speed, 
-    hd 
+	model, 
+	speed, 
+	hd 
 from 
-    pc
+	pc
 where 
-    (cd = '12x' or cd = '24x') 
+	(cd = '12x' or cd = '24x') 
   and 
-    price < 600
+	price < 600
 ```
 
 ## 6 
@@ -71,16 +71,16 @@ where
 
 ```
 select 
-  distinct maker,
-  speed
+	distinct maker,
+	speed
 from 
-  product 
+	product 
 inner join 
-  laptop 
+	laptop 
 on 
-  product.model = laptop.model 
+	product.model = laptop.model 
 where 
-  laptop.hd >= 10
+	laptop.hd >= 10
 ```
 
 ## 7 
@@ -88,44 +88,44 @@ where
 
 ```
 select 
-  distinct pc.model,
-  price 
+	distinct pc.model,
+  	price 
 from 
-  product 
+  	product 
 join 
-  pc 
+  	pc 
 on 
-  product.model = pc.model
+  	product.model = pc.model
 where 
-  maker = 'B'
+  	maker = 'B'
 
 union
 
 select 
-  distinct printer.model,
-  price 
+  	distinct printer.model,
+  	price 
 from 
-  product
+ 	product
 join 
-  printer 
+  	printer 
 on 
-  product.model = printer.model
+  	product.model = printer.model
 where 
-  maker = 'B'
+  	maker = 'B'
 
 union
 
 select 
-  distinct laptop.model,
-  price 
+  	distinct laptop.model,
+  	price 
 from 
-  product
+  	product
 join 
-  laptop 
+  l	aptop 
 on 
-  product.model = laptop.model
+  	product.model = laptop.model
 where 
-  maker = 'B'
+  	maker = 'B'
 ```
 
 ## 8
@@ -133,20 +133,20 @@ where
 
 ```
 select 
-  distinct maker 
+  	distinct maker 
 from 
-  Product
+  	Product
 where 
-  type = 'PC' 
+  	type = 'PC' 
 
 except 
 
 select 
-  distinct maker 
+  	distinct maker 
 from 
-  Product
+  	Product
 where 
-  type = 'Laptop'
+  	type = 'Laptop'
 ```
 
 ## 9
@@ -154,15 +154,15 @@ where
 
 ```
 select 
-  distinct Product.maker 
+  	distinct Product.maker 
 from 
-  Product
+  	Product
 join 
-  pc 
+  	pc 
 on 
-  Product.model = pc.model
+  	Product.model = pc.model
 where 
-  pc.speed >= 450
+  	pc.speed >= 450
 ```
 
 ## 10
@@ -170,15 +170,15 @@ where
 
 ```
 select 
-  distinct model, 
-  price
+  	distinct model, 
+ 	 price
 from 
-  Printer
+  	Printer
 where 
-  price = ( select 
-                max(price)
-            from 
-                Printer)
+  	price = (select 
+               		max(price)
+            	from 
+                	Printer)
 ```
 
 ## 11
@@ -186,9 +186,9 @@ where
 
 ```
 select 
-  avg(speed) as Avg_speed
+  	avg(speed) as Avg_speed
 from 
-  pc
+  	pc
 ```
 
 ## 12
@@ -196,11 +196,11 @@ from
 
 ```
 select 
-  avg(speed) as avg_speed
+  	avg(speed) as avg_speed
 from 
-  Laptop
+  	Laptop
 where 
-  price > 1000
+  	price > 1000
 ```
 
 ## 13
@@ -208,15 +208,15 @@ where
 
 ```
 select 
-  avg(speed) as avg_speed 
+  	avg(speed) as avg_speed 
 from 
-  pc 
+  	pc 
 inner join 
-  product 
+  	product 
 on 
-  product.model = pc.model
+  	product.model = pc.model
 where 
-  product.maker = 'A'
+  	product.maker = 'A'
 ```
 
 
@@ -225,17 +225,17 @@ where
 
 ```
 select 
-  ships.class,
-  name,
-  country 
+  	ships.class,
+  	name,
+  	country 
 from 
-  classes
+  	classes
 join 
-  ships 
+  	ships 
 on 
-  classes.class = ships.class
+  	classes.class = ships.class
 where 
-  numGuns >= 10
+  	numGuns >= 10
 ```
 
 ## 15
@@ -243,13 +243,13 @@ where
 
 ```
 select 
-  hd
+  	hd
 from 
-  pc
+  	pc
 group by 
-  hd 
+  	hd 
 having 
-  count(hd) >= 2
+  	count(hd) >= 2
 ```
 
 ## 16
@@ -257,19 +257,19 @@ having
 
 ```
 select
-  distinct A.model as modei_1, 
-  B.model as model_2,
-  A.speed ,
-  A.ram 
+  	distinct A.model as modei_1, 
+  	B.model as model_2,
+  	A.speed ,
+  	A.ram 
 from 
-  pc AS A, 
-  pc AS B
+  	pc AS A, 
+  	pc AS B
 where 
-    A.speed = B.speed
+  	A.speed = B.speed
   and 
-    A.ram = B.ram
+    	A.ram = B.ram
   and 
-    A.model > B.model
+    	A.model > B.model
 ```
 
 ## 17
@@ -277,20 +277,20 @@ where
 
 ```
 select 
-  distinct type, 
-  laptop.model, 
-  speed
+  	distinct type, 
+  	laptop.model, 
+  	speed
 from 
-  product 
+  	product 
 join 
-  laptop 
+  	laptop 
 on 
-  product.model = laptop.model 
+  	product.model = laptop.model 
 where 
-  speed < ALL ( select 
-                  speed
-                from 
-                   pc)
+  	speed < ALL 	(select 
+                 		speed
+                	from 
+                   		pc)
 ```
 
 ## 18
@@ -298,39 +298,196 @@ where
 
 ```
 SELECT 
-  DISTINCT maker,
+	DISTINCT maker,
 	price
 FROM 
-  product
+  	product
 JOIN 
-  printer 
+  	printer 
 ON 
-  product.model = printer.model
+  	product.model = printer.model
 WHERE 
-  price = (SELECT 
-              min(price) 
-           FROM 
-              printer 
-           WHERE 
-              color = 'y') 
+  	price = (SELECT 
+              		min(price) 
+           	FROM 
+              		printer 
+           	WHERE 
+             		color = 'y') 
 AND 
-  color = 'y'
+  	color = 'y'
 ```
 
 ## 19
-### Для каждого производителя, имеющего модели в таблице Laptop, найдите средний размер экрана выпускаемых им ПК-блокнотов.
-Вывести: maker, средний размер экрана.
+### Для каждого производителя, имеющего модели в таблице Laptop, найдите средний размер экрана выпускаемых им ПК-блокнотов. Вывести: maker, средний размер экрана.
 
 ```
 select 
-  maker, 
-  avg(screen) as avg_screen 
+	maker, 
+	avg(screen) as avg_screen 
 from 
-  laptop 
+	laptop 
 join 
-  product 
+	product 
 on
-  laptop.model = product.model 
+	laptop.model = product.model 
 group by 
-  maker
+	maker
+```
+
+## 20
+### Найдите производителей, выпускающих по меньшей мере три различных модели ПК. Вывести: Maker, число моделей ПК.
+
+```
+select 
+	maker, 
+	count(model) as count_model
+from 
+	product
+where 
+	type = 'PC'
+group by 
+	maker
+having 
+	count(model) >= 3
+```
+
+## 21
+### Найдите производителей, выпускающих по меньшей мере три различных модели ПК. Вывести: Maker, число моделей ПК.
+
+```
+select 
+	maker, 
+	max(price) as max_price
+from 
+	pc 
+join 
+	product 
+on 
+	product.model = pc.model
+group by 
+	maker
+```
+
+
+## 22
+### Для каждого значения скорости ПК, превышающего 600 МГц, определите среднюю цену ПК с такой же скоростью. Вывести: speed, средняя цена.
+
+```
+select 
+	speed,
+	avg(price) as avg_price 
+from 
+	pc 
+where 
+	speed > 600
+group by 
+	speed
+```
+
+## 23
+### Найдите производителей, которые производили бы как ПК со скоростью не менее 750 МГц, так и ПК-блокноты со скоростью не менее 750 МГц. Вывести: Maker
+
+```
+select 
+	maker 
+from 
+	product 
+join 
+	pc 
+on 
+	product.model = pc.model
+where 
+	pc.speed >= 750
+group by 
+	maker
+
+intersect 
+
+select 
+	maker 
+from 
+	product 
+join 
+	laptop 
+on 
+	product.model = laptop.model
+where 
+	laptop.speed >= 750
+group by 
+	maker
+```
+
+## 24
+### Перечислите номера моделей любых типов, имеющих самую высокую цену по всей имеющейся в базе данных продукции.
+
+```
+with rev as (
+	select 
+		model, price
+	from 
+		pc
+
+union 
+
+	select 
+		model, price
+	from 
+		laptop 
+
+union 
+
+	select 
+		model, price
+	from 
+		printer 
+) 
+
+select 
+	model 
+from 
+	rev
+where price = (select 
+               max(price) as max_price 
+               from rev)
+```
+
+## 25 
+### Найдите производителей принтеров, которые производят ПК с наименьшим объемом RAM и с самым быстрым процессором среди всех ПК, имеющих наименьший объем RAM. Вывести: Maker
+
+```
+select 
+	distinct maker 
+from 
+	product
+where 
+	type = 'Printer'
+and 
+	maker in 
+				(select 
+					maker
+				 from 
+				 	product
+				 join 
+				 	pc 
+				 ON product.model = pc.model
+				 where 
+				 	speed =
+							 (select 
+							 	max(speed)
+							  from 
+								  	(select 
+										speed 
+									 from 
+									 	pc 
+									 where 
+									 	ram = (select 
+												min(ram) 
+										       from 
+										       		pc)) 
+													as ze)
+				AND 
+				ram = (select 
+						min(ram) 
+					   from 
+					   	pc))
 ```
