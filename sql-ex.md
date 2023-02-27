@@ -522,3 +522,33 @@ union all
    	maker = 'A'
   ) as rv
 ```
+
+## 27
+### Найдите средний размер диска ПК каждого из тех производителей, которые выпускают и принтеры. Вывести: maker, средний размер HD.
+
+```
+select 
+	maker, 
+	AVG(pc.hd) as avg_hd 
+from 
+	product
+join 
+	pc 
+on 
+	pc.model = product.model 
+where 
+	maker in (select 
+			maker 
+		  from 
+			product 
+		  where 
+			type = 'Printer')
+group by 
+	maker
+```
+
+## 28
+### Используя таблицу Product, определить количество производителей, выпускающих по одной модели.
+
+```
+
