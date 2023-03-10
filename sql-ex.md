@@ -551,4 +551,163 @@ group by
 ### Используя таблицу Product, определить количество производителей, выпускающих по одной модели.
 
 ```
+select 
+	count(maker)  
+from (
+	select 
+		maker 
+	from 
+		product 
+	group by 
+		maker 
+	having 
+		count(model) = 1
+	) fin
+```
 
+## 29 
+### В предположении, что приход и расход денег на каждом пункте приема фиксируется не чаще одного раза в день [т.е. первичный ключ (пункт, дата)], написать запрос с выходными данными (пункт, дата, приход, расход). Использовать таблицы Income_o и Outcome_o.
+
+```
+select 
+	l.* ,
+	r.out 
+from 
+	Income_o as l 
+left join 
+	Outcome_o as r
+on 
+	l.point = r.point 
+and 
+	l.date = r.date
+union 
+
+select 
+	r.point,
+	r.date,
+	l.inc,
+	r.out
+from 
+	Income_o as l
+right join 
+	Outcome_o as r 
+on 
+	l.point = r.point 
+and 
+	l.date = r.date
+order by 
+	date
+```
+
+## 30 
+### В предположении, что приход и расход денег на каждом пункте приема фиксируется произвольное число раз (первичным ключом в таблицах является столбец code), требуется получить таблицу, в которой каждому пункту за каждую дату выполнения операций будет соответствовать одна строка.
+### Вывод: point, date, суммарный расход пункта за день (out), суммарный приход пункта за день (inc). Отсутствующие значения считать неопределенными (NULL).
+
+```
+select 
+	point, 
+	date, 
+	sum(out) as out,
+	sum(inc) as inc 
+from (
+	select 
+		point, 
+		date, 
+		null as out,
+		sum(inc) as inc
+	from 
+		Income
+	group by 
+		point, 
+		date 
+	union 
+	
+	select 
+		point, 
+		date, 
+		sum(out) as out,
+		null as inc 
+	from
+		Outcome
+	group by
+		point, 
+		date) as fin 
+group by 
+	point, 
+	date
+```
+
+## 31 
+### Для классов кораблей, калибр орудий которых не менее 16 дюймов, укажите класс и страну.
+
+```
+select 
+	class,
+	country
+from 
+	Classes
+where 
+	bore >= 16
+```
+
+## 32 
+### Одной из характеристик корабля является половина куба калибра его главных орудий (mw). С точностью до 2 десятичных знаков определите среднее значение mw для кораблей каждой страны, у которой есть корабли в базе данных.
+
+```
+Select 
+	country, 
+	cast(avg((power(bore,3)/2)) as numeric(6,2)) as weight
+from 
+	(select 
+		country, 
+		classes.class, 
+		bore, 
+		name 
+	from 
+		classes 
+	left join 
+		ships 
+	on 
+		classes.class=ships.class
+union all
+select 
+	distinct country, 
+	class, 
+	bore, 
+	ship 
+from 
+	classes t1 
+left join 
+	outcomes t2 
+on 
+	t1.class=t2.ship
+where 
+	ship=class 
+and 
+	ship not in (select name from ships) ) a
+where 
+	name IS NOT NULL 
+group by 
+	country
+```
+
+## 33
+### Укажите корабли, потопленные в сражениях в Северной Атлантике (North Atlantic). Вывод: ship.
+
+```
+select 
+	ship 
+from 
+	Outcomes as o
+join 
+	Battles as b
+on
+	o.battle = b.name
+where 
+	b.name = 'North Atlantic'
+and 
+	result = 'sunk'
+```
+
+## 34
+### 
